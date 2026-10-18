@@ -557,7 +557,10 @@ var CERTIFICADOS = [
   { group: "netzum", title: "Política de conflicto de intereses", meta: "Netzum", file: "certificados/POLITICA DE CONFLICTO DE INTERESES.pdf" },
   { group: "netzum", title: "Embajadores INTI", meta: "Netzum", file: "certificados/EMBAJADORES INTI.pdf" },
   { group: "netzum", title: "Certificado Netzum", meta: "Netzum", file: "certificados/ANDRES_BENJAMIN_TEXACA_ULO_863E4E74.pdf" }
-];
+]; var CARPETA = "Certificados";   // escríbela EXACTAMENTE como se llama en GitHub
+CERTIFICADOS.forEach(function (c) {
+  c.file = CARPETA + "/" + encodeURI(c.file.replace(/^certificados\//i, ""));
+});
 
 (function () {
   var filtros = document.getElementById("filtros");
