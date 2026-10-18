@@ -10,12 +10,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --floor: #eceff1;      /* concreto de almacén */
+    --floor: #eef3fa;      /* fondo azul muy claro */
     --paper: #ffffff;
-    --ink: #14263d;        /* azul marino del CV */
-    --steel: #55657a;
-    --line-yellow: #f2b705; /* demarcación de piso */
-    --rule: #c9d0d8;
+    --ink: #0b2447;        /* azul marino profundo */
+    --ink-2: #19376d;      /* azul marino medio */
+    --steel: #4a5f80;
+    --accent: #3d8bfd;     /* azul de acento (franja de piso) */
+    --soft: #dbe8fb;       /* azul suave */
+    --rule: #c5d3e8;
     --display: "Archivo", "Arial Narrow", Arial, sans-serif;
     --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
     --max: 1080px;
@@ -23,18 +25,11 @@
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    margin: 0;
-    background: var(--floor);
-    color: var(--ink);
-    font-family: var(--body);
-    font-size: 1.0625rem;
-    line-height: 1.6;
+    margin: 0; background: var(--floor); color: var(--ink);
+    font-family: var(--body); font-size: 1.0625rem; line-height: 1.6;
   }
   a { color: inherit; }
-  a:focus-visible, button:focus-visible {
-    outline: 3px solid var(--ink);
-    outline-offset: 3px;
-  }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
   .wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem; }
 
   /* Navegación */
@@ -46,37 +41,34 @@
   .brand { font-family: var(--display); font-weight: 800; text-decoration: none; letter-spacing: -.01em; }
   nav ul { display: flex; gap: 1.4rem; list-style: none; margin: 0; padding: 0; flex-wrap: wrap; }
   nav a { text-decoration: none; font-weight: 500; font-size: .95rem; color: var(--steel); }
-  nav a:hover { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line-yellow); text-decoration-thickness: 3px; text-underline-offset: 5px; }
+  nav a:hover { color: var(--ink); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 3px; text-underline-offset: 5px; }
 
   /* Hero */
-  .hero { padding: 4.5rem 0 3.5rem; position: relative; }
+  .hero { padding: 4.5rem 0 3.5rem; background: linear-gradient(180deg, var(--soft) 0%, var(--floor) 100%); }
   .hero .wrap { display: grid; grid-template-columns: 1fr 260px; gap: 3rem; align-items: center; }
   .hero h1 {
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: clamp(2.6rem, 7vw, 5.2rem);
-    line-height: .98;
-    letter-spacing: -.03em;
-    margin: 0 0 1.4rem;
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(2.6rem, 7vw, 5.2rem); line-height: .98; letter-spacing: -.03em; margin: 0 0 1.4rem;
   }
   .hero .role { font-size: 1.25rem; max-width: 34rem; margin: 0 0 2rem; }
   .hero .role strong { font-weight: 600; }
   .actions { display: flex; gap: .8rem; flex-wrap: wrap; }
   .btn {
     display: inline-block; padding: .8rem 1.3rem; font-weight: 600; text-decoration: none;
-    border: 2px solid var(--ink); font-size: 1rem;
+    border: 2px solid var(--ink); font-size: 1rem; font-family: inherit; cursor: pointer;
+    background: transparent; color: inherit;
   }
   .btn.primary { background: var(--ink); color: var(--paper); }
-  .btn.primary:hover { background: #0c1829; }
+  .btn.primary:hover { background: var(--ink-2); border-color: var(--ink-2); }
   .btn.ghost:hover { background: var(--paper); }
   .photo {
     width: 100%; aspect-ratio: 4/5; background: var(--ink); color: var(--paper);
     display: grid; place-items: center; font-family: var(--display); font-weight: 800; font-size: 4rem;
-    border-bottom: 10px solid var(--line-yellow); overflow: hidden;
+    border-bottom: 10px solid var(--accent); overflow: hidden;
   }
   .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  /* franja amarilla de piso, el elemento memorable */
-  .floorline { height: 10px; background: var(--line-yellow); }
+  /* franja azul de piso, el elemento memorable */
+  .floorline { height: 10px; background: var(--accent); }
 
   section { padding: 4rem 0; }
   section.alt { background: var(--paper); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
@@ -95,34 +87,34 @@
   .facts span:last-child { font-weight: 600; text-align: right; }
 
   /* Experiencia: una secuencia real, por eso lleva línea de tiempo */
-  .timeline { list-style: none; margin: 0; padding: 0 0 0 1.6rem; border-left: 4px solid var(--line-yellow); }
+  .timeline { list-style: none; margin: 0; padding: 0 0 0 1.6rem; border-left: 4px solid var(--accent); }
   .timeline > li { position: relative; padding-bottom: 2.2rem; }
   .timeline > li::before {
     content: ""; position: absolute; left: calc(-1.6rem - 10px); top: .45rem;
     width: 16px; height: 16px; background: var(--ink); border: 3px solid var(--paper);
   }
-  section.alt .timeline > li::before { border-color: var(--paper); }
   .meta { color: var(--steel); font-size: .95rem; margin: .2rem 0 .7rem; }
   .timeline ul { margin: 0; padding-left: 1.1rem; max-width: 42rem; }
   .timeline li li { margin-bottom: .35rem; padding: 0; }
   .timeline li li::before { display: none; }
 
-  /* Resultados: estantería de almacén */
+  /* Resultados y certificaciones: estantería de almacén */
   .rack { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 3px solid var(--ink); background: var(--paper); }
+  .rack.three { grid-template-columns: repeat(3, 1fr); }
   .bay { padding: 1.4rem 1.2rem; border-right: 3px solid var(--ink); min-height: 170px; display: flex; flex-direction: column; justify-content: space-between; }
   .bay:last-child { border-right: none; }
   .bay .figure { font-family: var(--display); font-weight: 800; font-size: 2.6rem; line-height: 1; letter-spacing: -.03em; }
   .bay p { margin: .6rem 0 0; font-size: .95rem; }
   .bay small { color: var(--steel); }
-  .bay.hot { background: var(--line-yellow); }
-  .bay.hot small { color: var(--ink); }
+  .bay.hot { background: var(--soft); }
+  .bay.hot small { color: var(--ink-2); }
   .note { color: var(--steel); font-size: .9rem; margin-top: 1rem; }
 
   /* Contenido educativo */
   .topics { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1.2rem 0 1.6rem; padding: 0; list-style: none; }
   .topics li { border: 2px solid var(--ink); padding: .35rem .9rem; font-weight: 500; background: var(--paper); }
   .links { display: flex; gap: 1.2rem; flex-wrap: wrap; }
-  .links a { font-weight: 600; text-decoration-color: var(--line-yellow); text-decoration-thickness: 3px; text-underline-offset: 5px; }
+  .links a { font-weight: 600; text-decoration-color: var(--accent); text-decoration-thickness: 3px; text-underline-offset: 5px; }
 
   /* Habilidades */
   .skills { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
@@ -136,13 +128,70 @@
   .edu .when { color: var(--steel); white-space: nowrap; }
   .edu .where { color: var(--steel); font-size: .95rem; }
 
+  /* Certificaciones */
+  .cert-intro { max-width: 44rem; }
+  .filters { display: flex; flex-wrap: wrap; gap: .5rem; margin: 2rem 0 0; }
+  .filters button {
+    font: inherit; font-size: .92rem; font-weight: 500; cursor: pointer;
+    border: 2px solid var(--ink); background: var(--paper); color: var(--ink); padding: .25rem .8rem;
+  }
+  .filters button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+  /* Carrusel de certificados */
+  .car-track {
+    list-style: none; margin: 1rem 0 0; padding: .6rem .25rem 1.2rem;
+    display: flex; gap: 1.1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin;
+  }
+  .car-item { flex: 0 0 min(280px, 74vw); scroll-snap-align: start; }
+  .car-card {
+    width: 100%; text-align: left; font: inherit; cursor: pointer; color: inherit; background: var(--paper);
+    border: 2px solid var(--ink); padding: 0; display: flex; flex-direction: column;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .car-card:hover { transform: translateY(-4px); box-shadow: 0 6px 0 var(--accent); }
+  .thumb {
+    aspect-ratio: 1.414 / 1; background: var(--soft); display: grid; place-items: center;
+    overflow: hidden; border-bottom: 2px solid var(--ink);
+  }
+  .thumb img, .thumb canvas { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .thumb-msg { padding: 1rem; text-align: center; font-size: .9rem; color: var(--steel); }
+  .car-title { padding: .75rem .95rem .1rem; font-weight: 600; line-height: 1.3; }
+  .car-card small { padding: 0 .95rem .85rem; color: var(--steel); }
+  .car-controls { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+  .car-controls .hint { color: var(--steel); font-size: .92rem; margin-left: .6rem; }
+  .car-btn { padding: .5rem .9rem; }
+
+  /* Visor grande */
+  dialog.visor {
+    width: min(920px, 94vw); height: min(88vh, 780px); padding: 0;
+    border: 3px solid var(--ink); background: var(--paper); color: var(--ink);
+  }
+  dialog.visor[open] { display: flex; flex-direction: column; }
+  dialog.visor::backdrop { background: rgba(11, 36, 71, .75); }
+  .visor-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding: .8rem 1.2rem; border-bottom: 3px solid var(--accent);
+  }
+  .visor-head h2 { margin: 0; font-size: 1.2rem; }
+  .visor-head small { display: block; color: var(--steel); font-family: var(--body); font-weight: 400; font-size: .9rem; letter-spacing: 0; }
+  .visor-view { flex: 1; min-height: 0; display: grid; place-items: center; background: var(--floor); overflow: auto; }
+  .visor-view iframe { width: 100%; height: 100%; border: 0; background: var(--paper); }
+  .visor-view img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+  .visor-empty { padding: 2rem; max-width: 26rem; text-align: center; color: var(--steel); }
+  .visor-foot {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+    padding: .7rem 1.2rem; border-top: 1px solid var(--rule);
+  }
+  .visor-foot a { font-weight: 600; text-decoration-color: var(--accent); text-decoration-thickness: 3px; text-underline-offset: 5px; }
+  .visor-nav { display: flex; align-items: center; gap: .6rem; }
+
   /* Contacto */
-  .contact { background: var(--ink); color: var(--paper); }
+  .contact { background: linear-gradient(135deg, var(--ink) 0%, var(--ink-2) 100%); color: var(--paper); }
   .contact h2 { color: var(--paper); }
-  .contact p { color: #d5dce5; }
+  .contact p { color: #d5e1f5; }
   .contact .btn { border-color: var(--paper); }
-  .contact .btn.primary { background: var(--line-yellow); border-color: var(--line-yellow); color: var(--ink); }
-  .contact .btn.ghost:hover { background: rgba(255,255,255,.1); }
+  .contact .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--ink); }
+  .contact .btn.ghost:hover { background: rgba(255,255,255,.12); }
 
   footer { padding: 1.5rem 0; color: var(--steel); font-size: .9rem; }
 
@@ -153,10 +202,17 @@
     .bay:nth-child(2) { border-right: none; }
     .bay:nth-child(-n+2) { border-bottom: 3px solid var(--ink); }
     .bay:nth-child(3) { border-right: 3px solid var(--ink); }
+    .rack.three { grid-template-columns: 1fr; }
+    .rack.three .bay { border-right: none; border-bottom: 3px solid var(--ink); min-height: 0; gap: 1rem; }
+    .rack.three .bay:last-child { border-bottom: none; }
     .skills { grid-template-columns: 1fr; }
     .edu li { grid-template-columns: 1fr; gap: .2rem; }
+    dialog.visor { height: 92vh; }
   }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .car-card { transition: none; }
+  }
 </style>
 </head>
 <body>
@@ -172,6 +228,7 @@
         <li><a href="#contenido">Contenido</a></li>
         <li><a href="#habilidades">Habilidades</a></li>
         <li><a href="#formacion">Formación</a></li>
+        <li><a href="#certificaciones">Certificaciones</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
     </nav>
@@ -202,7 +259,7 @@
       <div>
         <h2>Sobre mí</h2>
         <p>Soy Ingeniero Industrial por la UMSA y trabajo hoy como Asistente Logístico en Droguería INTI, en La Paz. Administro abastecimiento e inventarios en SAP MM/WM, construyo dashboards en Power BI y automatizo reportes con Excel, Power Query y macros.</p>
-        <p>He pasado por almacén, distribución, producción y docencia, así que conozco la operación desde el piso. Hoy sumo formación en Supply Chain Management y Gestión Comercial para conectar la logística con el negocio, y avanzo hacia el análisis de datos y el análisis logístico.</p>
+        <p>He pasado por almacén, distribución, producción, marketing y docencia, así que conozco la operación desde el piso y también el lado comercial. Hoy sumo formación en Supply Chain Management y Gestión Comercial para conectar la logística con el negocio, y avanzo hacia el análisis de datos y el análisis logístico.</p>
       </div>
       <ul class="facts">
         <li><span>Ubicación</span><span>La Paz, Bolivia</span></li>
@@ -255,6 +312,16 @@
             <li>Identifiqué cuellos de botella y eliminé desperdicios con 5S, KPIs y lean, y subí la productividad 5%.</li>
           </ul>
         </li>
+        <li>
+          <h3>Pasante de Marketing · Plásticos Industriales S.R.L.</h3>
+          <p class="meta">Pasantía · 2021 · 6 meses</p>
+          <ul>
+            <li>Desarrollé estrategias de marketing, estudio de mercado y segmentación para identificar al cliente objetivo.</li>
+            <li>Creé el catálogo físico y digital, la página web y las redes sociales de la empresa.</li>
+            <li>Analicé datos con Excel e IBM SPSS y definí indicadores de control (KPI).</li>
+            <li>Aumenté 20% las ventas desde redes sociales y mejoré el posicionamiento de la marca.</li>
+          </ul>
+        </li>
       </ol>
     </div>
   </section>
@@ -272,8 +339,8 @@
           <p>Errores de picking<br><small>Farmacias Chávez</small></p>
         </div>
         <div class="bay">
-          <div class="figure">+5%</div>
-          <p>Productividad en planta<br><small>Plásticos Industriales</small></p>
+          <div class="figure">+20%</div>
+          <p>Ventas desde redes sociales<br><small>Plásticos Industriales</small></p>
         </div>
         <div class="bay">
           <div class="figure">+5k</div>
@@ -331,6 +398,7 @@
           <ul>
             <li>Inglés técnico B1</li>
             <li>Office 365, Canva y CapCut</li>
+            <li>Marketing digital y análisis con IBM SPSS</li>
             <li>Creación de contenido educativo</li>
             <li>Organización de eventos académicos</li>
           </ul>
@@ -360,10 +428,47 @@
           <div class="when">Feb 2019 – Abr 2025</div>
         </li>
         <li>
+          <div><strong>Técnico Medio en Sistemas Informáticos</strong><div class="where">Colegio Franz Tamayo</div></div>
+          <div class="when">2017</div>
+        </li>
+        <li>
           <div><strong>Congreso Internacional SISO: ISO 45001 y OHSAS 18001</strong><div class="where">UMSA · Certificación</div></div>
           <div class="when">2022</div>
         </li>
       </ul>
+    </div>
+  </section>
+
+  <section id="certificaciones">
+    <div class="wrap">
+      <h2>Certificaciones y conocimiento</h2>
+      <p class="cert-intro">Además de la carrera y los diplomados, me capacito de forma continua en calidad y datos. Desliza el carrusel y toca cualquier certificado para verlo en grande.</p>
+      <div class="rack three">
+        <div class="bay">
+          <div class="figure">24 h</div>
+          <p><strong>ISO 9001</strong>, 8 certificados de 3 horas<br><small>INTEDYA</small></p>
+        </div>
+        <div class="bay hot">
+          <div class="figure">13 h</div>
+          <p><strong>Especialización en Power BI y Tableau</strong><br><small>Visualización de datos</small></p>
+        </div>
+        <div class="bay">
+          <div class="figure">1–2 h</div>
+          <p><strong>Cursos cortos en Netzum</strong>, capacitación continua<br><small>Plataforma corporativa</small></p>
+        </div>
+      </div>
+
+      <div class="filters" id="filtros" role="group" aria-label="Filtrar certificados"></div>
+
+      <div role="region" aria-roledescription="carrusel" aria-label="Certificados">
+        <ul class="car-track" id="pista"></ul>
+      </div>
+      <div class="car-controls">
+        <button type="button" class="btn ghost car-btn" id="car-prev" aria-label="Certificados anteriores">Anterior</button>
+        <button type="button" class="btn ghost car-btn" id="car-next" aria-label="Certificados siguientes">Siguiente</button>
+        <button type="button" class="btn primary car-btn" id="abrir-visor">Ver en grande</button>
+        <span class="hint">Desliza con el dedo o usa los botones.</span>
+      </div>
     </div>
   </section>
 
@@ -374,15 +479,268 @@
       <div class="actions">
         <a class="btn primary" href="mailto:andreesteexaca@gmail.com">Enviar un correo</a>
         <a class="btn ghost" href="https://www.linkedin.com/in/TU-USUARIO" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn ghost" href="https://wa.me/59178933908" target="_blank" rel="noopener">WhatsApp</a>
       </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap">Andres Texaca · La Paz, Bolivia · +591 78933908</div>
+  <div class="wrap">Andres Texaca · La Paz, Bolivia</div>
 </footer>
+
+<!-- Visor grande de un certificado -->
+<dialog class="visor" id="visor" aria-labelledby="visor-titulo">
+  <div class="visor-head">
+    <h2 id="visor-titulo"><span id="v-titulo">Certificado</span><small id="v-meta"></small></h2>
+    <button type="button" class="btn ghost car-btn" id="cerrar-visor">Cerrar</button>
+  </div>
+  <div class="visor-view" id="v-vista"></div>
+  <div class="visor-foot">
+    <div class="visor-nav">
+      <button type="button" class="btn ghost car-btn" id="v-prev" aria-label="Certificado anterior">Anterior</button>
+      <span id="v-contador" aria-live="polite"></span>
+      <button type="button" class="btn ghost car-btn" id="v-next" aria-label="Certificado siguiente">Siguiente</button>
+    </div>
+    <a id="v-enlace" href="#" target="_blank" rel="noopener">Abrir en otra pestaña</a>
+  </div>
+</dialog>
+
+<!-- pdf.js: genera la miniatura de cada PDF en el carrusel -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+/*
+  CÓMO AGREGAR CERTIFICADOS
+  1. Crea una carpeta llamada "certificados" en tu repositorio, junto a index.html.
+  2. Sube ahí cada certificado (PDF, PNG o JPG).
+  3. Edita la lista de abajo: cambia "title", "meta" y "file" para que coincidan
+     con el nombre real de cada archivo. Para agregar uno, copia una línea.
+  4. Opcional: si un PDF no muestra bien su miniatura, sube también una imagen
+     (PNG o JPG) y agrégala en "preview": "certificados/mi-imagen.png".
+  Grupos disponibles: "iso", "datos", "netzum", "otros".
+*/
+var GRUPOS = {
+  todos:  "Todos",
+  iso:    "ISO 9001",
+  datos:  "Power BI y Tableau",
+  netzum: "Netzum",
+  otros:  "Otros"
+};
+
+var CERTIFICADOS = [
+  { group: "datos",  title: "Especialización en Power BI y Tableau", meta: "13 horas", file: "certificados/power-bi-tableau.pdf" },
+  { group: "iso",    title: "ISO 9001 · Certificado 1", meta: "INTEDYA · 3 horas", file: "certificados/iso9001-01.pdf" },
+  { group: "iso",    title: "ISO 9001 · Certificado 2", meta: "INTEDYA · 3 horas", file: "certificados/iso9001-02.pdf" },
+  { group: "iso",    title: "ISO 9001 · Certificado 3", meta: "INTEDYA · 3 horas", file: "certificados/iso9001-03.pdf" },
+  { group: "iso",    title: "ISO 9001 · Certificado 4", meta: "INTEDYA · 3 horas", file: "certificados/iso9001-04.pdf" },
+  { group: "iso",    title: "ISO 9001 · Certificado 5", meta: "INTEDYA · 3 horas", file: "certificados/iso9001-05.pdf" },
+  { group: "iso",    title: "ISO 9001 · Certificado 6", meta: "INTEDYA · 3 horas", file: "certificados/iso9001-06.pdf" },
+  { group: "iso",    title: "ISO 9001 · Certificado 7", meta: "INTEDYA · 3 horas", file: "certificados/iso9001-07.pdf" },
+  { group: "iso",    title: "ISO 9001 · Certificado 8", meta: "INTEDYA · 3 horas", file: "certificados/iso9001-08.pdf" },
+  { group: "netzum", title: "Curso Netzum 1", meta: "Netzum", file: "certificados/netzum-01.pdf" },
+  { group: "netzum", title: "Curso Netzum 2", meta: "Netzum", file: "certificados/netzum-02.pdf" }
+];
+
+(function () {
+  var filtros = document.getElementById("filtros");
+  var pista = document.getElementById("pista");
+  var btnPrev = document.getElementById("car-prev");
+  var btnNext = document.getElementById("car-next");
+  var btnVisor = document.getElementById("abrir-visor");
+  var visor = document.getElementById("visor");
+  var vTitulo = document.getElementById("v-titulo");
+  var vMeta = document.getElementById("v-meta");
+  var vVista = document.getElementById("v-vista");
+  var vEnlace = document.getElementById("v-enlace");
+  var vContador = document.getElementById("v-contador");
+  var grupoActual = "todos";
+  var lista = [];
+  var indice = 0;
+
+  var WORKER = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  if (window.pdfjsLib) { pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER; }
+
+  function esPdf(ruta) { return /\.pdf$/i.test(ruta); }
+
+  /* ---------- Miniaturas ---------- */
+  function mensaje(contenedor, texto) {
+    contenedor.textContent = "";
+    var p = document.createElement("span");
+    p.className = "thumb-msg";
+    p.textContent = texto;
+    contenedor.appendChild(p);
+  }
+
+  function miniaturaPdf(url, contenedor) {
+    if (!window.pdfjsLib) { mensaje(contenedor, "Vista previa no disponible"); return; }
+    pdfjsLib.getDocument(url).promise
+      .then(function (pdf) { return pdf.getPage(1); })
+      .then(function (page) {
+        var base = page.getViewport({ scale: 1 });
+        var vp = page.getViewport({ scale: 560 / base.width });
+        var lienzo = document.createElement("canvas");
+        lienzo.width = vp.width;
+        lienzo.height = vp.height;
+        return page.render({ canvasContext: lienzo.getContext("2d"), viewport: vp }).promise.then(function () {
+          contenedor.textContent = "";
+          contenedor.appendChild(lienzo);
+        });
+      })
+      .catch(function () { mensaje(contenedor, "Vista previa no disponible. Revisa que el archivo esté en la carpeta certificados."); });
+  }
+
+  function miniatura(cert, contenedor) {
+    var imagen = cert.preview || (esPdf(cert.file) ? null : cert.file);
+    if (imagen) {
+      var img = new Image();
+      img.alt = "";
+      img.loading = "lazy";
+      img.onerror = function () { mensaje(contenedor, "No se encontró la imagen."); };
+      img.src = imagen;
+      contenedor.appendChild(img);
+      return;
+    }
+    mensaje(contenedor, "Cargando vista previa…");
+    miniaturaPdf(cert.file, contenedor);
+  }
+
+  /* ---------- Carrusel ---------- */
+  function filtrar() {
+    lista = CERTIFICADOS.filter(function (c) { return grupoActual === "todos" || c.group === grupoActual; });
+  }
+
+  function pintarCarrusel() {
+    filtrar();
+    pista.textContent = "";
+    lista.forEach(function (cert, i) {
+      var li = document.createElement("li");
+      li.className = "car-item";
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "car-card";
+      b.setAttribute("aria-label", "Ver en grande: " + cert.title);
+      var th = document.createElement("div");
+      th.className = "thumb";
+      var t = document.createElement("span");
+      t.className = "car-title";
+      t.textContent = cert.title;
+      var m = document.createElement("small");
+      m.textContent = cert.meta;
+      b.appendChild(th);
+      b.appendChild(t);
+      b.appendChild(m);
+      b.addEventListener("click", function () { abrirVisor(i); });
+      li.appendChild(b);
+      pista.appendChild(li);
+      miniatura(cert, th);
+    });
+    pista.scrollLeft = 0;
+  }
+
+  function pintarFiltros() {
+    filtros.textContent = "";
+    Object.keys(GRUPOS).forEach(function (clave) {
+      if (clave !== "todos" && !CERTIFICADOS.some(function (c) { return c.group === clave; })) return;
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = GRUPOS[clave];
+      b.setAttribute("aria-pressed", clave === grupoActual ? "true" : "false");
+      b.addEventListener("click", function () {
+        grupoActual = clave;
+        pintarFiltros();
+        pintarCarrusel();
+      });
+      filtros.appendChild(b);
+    });
+  }
+
+  function mover(direccion) {
+    var paso = Math.max(pista.clientWidth * 0.8, 240);
+    pista.scrollBy({ left: direccion * paso, behavior: "smooth" });
+  }
+  btnPrev.addEventListener("click", function () { detenerAuto(); mover(-1); });
+  btnNext.addEventListener("click", function () { detenerAuto(); mover(1); });
+
+  /* Avance automático suave: se detiene al tocar, enfocar o usar el carrusel */
+  var temporizador = null;
+  var detenido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function avanzarSolo() {
+    if (pista.scrollLeft + pista.clientWidth >= pista.scrollWidth - 4) {
+      pista.scrollTo({ left: 0, behavior: "smooth" });
+    } else {
+      mover(1);
+    }
+  }
+  function iniciarAuto() {
+    if (detenido || temporizador) return;
+    temporizador = setInterval(avanzarSolo, 4500);
+  }
+  function pausarAuto() { clearInterval(temporizador); temporizador = null; }
+  function detenerAuto() { detenido = true; pausarAuto(); }
+  pista.addEventListener("mouseenter", pausarAuto);
+  pista.addEventListener("mouseleave", iniciarAuto);
+  pista.addEventListener("pointerdown", detenerAuto);
+  pista.addEventListener("focusin", detenerAuto);
+  pista.addEventListener("wheel", detenerAuto, { passive: true });
+  iniciarAuto();
+
+  /* ---------- Visor grande ---------- */
+  function mostrar() {
+    var cert = lista[indice];
+    if (!cert) return;
+    vTitulo.textContent = cert.title;
+    vMeta.textContent = cert.meta;
+    vEnlace.href = cert.file;
+    vContador.textContent = (indice + 1) + " de " + lista.length;
+    vVista.textContent = "";
+    if (esPdf(cert.file)) {
+      var marco = document.createElement("iframe");
+      marco.src = cert.file;
+      marco.title = "Certificado: " + cert.title;
+      vVista.appendChild(marco);
+    } else {
+      var img = document.createElement("img");
+      img.alt = "Certificado: " + cert.title;
+      img.onerror = function () {
+        vVista.textContent = "";
+        var p = document.createElement("p");
+        p.className = "visor-empty";
+        p.textContent = "No se encontró el archivo " + cert.file + ". Revisa que esté en la carpeta certificados.";
+        vVista.appendChild(p);
+      };
+      img.src = cert.file;
+      vVista.appendChild(img);
+    }
+  }
+
+  function abrirVisor(i) {
+    if (!lista.length) return;
+    detenerAuto();
+    indice = i;
+    mostrar();
+    if (!visor.open) visor.showModal();
+  }
+
+  function cambiar(delta) {
+    indice = (indice + delta + lista.length) % lista.length;
+    mostrar();
+  }
+
+  btnVisor.addEventListener("click", function () { abrirVisor(0); });
+  document.getElementById("cerrar-visor").addEventListener("click", function () { visor.close(); });
+  document.getElementById("v-prev").addEventListener("click", function () { cambiar(-1); });
+  document.getElementById("v-next").addEventListener("click", function () { cambiar(1); });
+  visor.addEventListener("click", function (e) { if (e.target === visor) visor.close(); });
+  visor.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft") { cambiar(-1); }
+    if (e.key === "ArrowRight") { cambiar(1); }
+  });
+  visor.addEventListener("close", function () { vVista.textContent = ""; });
+
+  pintarFiltros();
+  pintarCarrusel();
+})();
+</script>
 
 </body>
 </html>
+
