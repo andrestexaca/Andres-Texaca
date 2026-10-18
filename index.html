@@ -509,13 +509,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
 /*
-  CÓMO AGREGAR CERTIFICADOS
-  1. Crea una carpeta llamada "certificados" en tu repositorio, junto a index.html.
-  2. Sube ahí cada certificado (PDF, PNG o JPG).
-  3. Edita la lista de abajo: cambia "title", "meta" y "file" para que coincidan
-     con el nombre real de cada archivo. Para agregar uno, copia una línea.
-  4. Opcional: si un PDF no muestra bien su miniatura, sube también una imagen
-     (PNG o JPG) y agrégala en "preview": "certificados/mi-imagen.png".
+  CERTIFICADOS
+  La página lee sola los archivos de la carpeta "Certificados" de tu repositorio de GitHub,
+  así que los nombres de archivo siempre coinciden (tildes, espacios y mayúsculas incluidos).
+  La tabla TABLA solo sirve para ponerle título, grupo y descripción a cada archivo.
+  - Para dar título a un archivo nuevo: agrega una línea con su nombre (sin ".pdf").
+  - Un archivo que no esté en la tabla aparece igual, en el grupo "Otros", con su nombre como título.
   Grupos disponibles: "iso", "datos", "netzum", "otros".
 */
 var GRUPOS = {
@@ -526,41 +525,103 @@ var GRUPOS = {
   otros:  "Otros"
 };
 
-var CERTIFICADOS = [
-  { group: "datos",  title: "Especialización en Power BI y Tableau", meta: "13 horas", file: "certificados/ESPECIALIZACIÓN POWER BI Y TABLEAU.pdf" },
+var USUARIO = "andrestexaca";
+var REPO = "Andres-Texaca";
+var CARPETA = "Certificados";   /* solo se usa si GitHub no responde */
 
-  { group: "iso",    title: "ISO 9001 · Certificado INTEDYA", meta: "INTEDYA · 3 horas", file: "certificados/ANALISIS DE RIESGOS Y OPORTUNIDADES.pdf" },
-  { group: "iso",    title: "Contexto de la organización", meta: "INTEDYA · 3 horas", file: "certificados/Diploma contexto de la organización.pdf" },
-  { group: "iso",    title: "Directrices para la auditoría del sistema de gestión", meta: "INTEDYA · 3 horas", file: "certificados/Directrices ISO 19001 para la auditoria del sistema de gestión.pdf" },
-  { group: "iso",    title: "Identificación de objetivos e indicadores", meta: "INTEDYA · 3 horas", file: "IDENTIFICACION DE OBJETIVOS E INDICADORES PARA EL SEGUIMIENTO Y MEJORA DE LOS SISTEMAS DE GESTIÓN ISO.pdf" },
-  { group: "iso",    title: "ISO: qué es y cómo funciona", meta: "INTEDYA · 3 horas", file: "certificados/ISO QUE ES Y COMO FUNCIONA.pdf" },
-  { group: "iso",    title: "Manejo de no conformidades", meta: "INTEDYA · 3 horas", file: "certificados/MANEJO DE NO CONFORMIDADES CORRECTIVAS.pdf" },
-  { group: "iso",    title: "Revisión por la dirección: buenas prácticas", meta: "INTEDYA · 3 horas", file: "certificados/Revisión por la dirección buenas prácticas.pdf" },
-  { group: "iso",    title: "Sensibilización en calidad y excelencia", meta: "INTEDYA · 3 horas", file: "certificados/SENSIBILIZACIÓN EN CALIDAD Y EXCELENCIA.pdf" },
+var TABLA = [
+  { nombre: "ESPECIALIZACIÓN POWER BI Y TABLEAU", title: "Especialización en Power BI y Tableau", meta: "13 horas", group: "datos" },
 
-  { group: "datos",  title: "Operador economico autorizado", meta: "Netzum", file: "OPERADOR ECONOMICO AUTORIZADO.pdf" },
-  { group: "datos",  title: "Power BI básico con IA", meta: "Netzum", file: "certificados/POWER BI BASICO CON IA.pdf" },
-  { group: "datos",  title: "Power BI intermedio", meta: "Netzum", file: "certificados/POWER BI INTERMEDIO.pdf" },
-  { group: "datos",  title: "Introducción a Tableau", meta: "Netzum", file: "certificados/INTRODUCCIÓN A TABLEAU.pdf" },
-  { group: "datos",  title: "Tableau intermedio y avanzado", meta: "Netzum", file: "certificados/TABLEAU INTERMEDIO AVANZADO.pdf" },
-  { group: "datos",  title: "Storytelling y data visualization", meta: "Netzum", file: "certificados/SOTYTELLING Y DATA VISUALIZATION.pdf" },
+  { nombre: "ANALISIS DE RIESGOS Y OPORTUNIDADES", title: "Análisis de riesgos y oportunidades", meta: "INTEDYA · 3 horas", group: "iso" },
+  { nombre: "Diploma contexto de la organización", title: "Contexto de la organización", meta: "INTEDYA · 3 horas", group: "iso" },
+  { nombre: "Directrices ISO 19001 para la auditoria del sistema de gestión", title: "Directrices para la auditoría del sistema de gestión", meta: "INTEDYA · 3 horas", group: "iso" },
+  { nombre: "IDENTIFICACION DE OBJETIVOS E INDICADORES PARA EL SEGUIMIENTO Y MEJORA DE LOS SISTEMAS DE GESTIÓN ISO", title: "Identificación de objetivos e indicadores", meta: "INTEDYA · 3 horas", group: "iso" },
+  { nombre: "ISO QUE ES Y COMO FUNCIONA", title: "ISO: qué es y cómo funciona", meta: "INTEDYA · 3 horas", group: "iso" },
+  { nombre: "MANEJO DE NO CONFORMIDADES CORRECTIVAS", title: "Manejo de no conformidades", meta: "INTEDYA · 3 horas", group: "iso" },
+  { nombre: "Revisión por la dirección buenas prácticas", title: "Revisión por la dirección: buenas prácticas", meta: "INTEDYA · 3 horas", group: "iso" },
+  { nombre: "SENSIBILIZACIÓN EN CALIDAD Y EXCELENCIA", title: "Sensibilización en calidad y excelencia", meta: "INTEDYA · 3 horas", group: "iso" },
 
-  { group: "netzum", title: "Power Apps con IA", meta: "Netzum", file: "certificados/POWER APPS CON IA.pdf" },
-  { group: "netzum", title: "Power Automate con IA", meta: "Netzum", file: "certificados/POWER AUTOMATE CON IA.pdf" },
-  { group: "netzum", title: "Microsoft Outlook", meta: "Netzum", file: "certificados/Microsoft Outlook.pdf" },
-  { group: "netzum", title: "LinkedIn desde cero con IA", meta: "Netzum", file: "certificados/LINKEDIN DESDE CERO CON IA.pdf" },
-  { group: "netzum", title: "Interpretación de la ISO 9001", meta: "Netzum", file: "certificados/INTERPRETACIÓN DE LA ISO 9001.pdf" },
-  { group: "netzum", title: "Farmacovigilancia 1", meta: "Netzum", file: "certificados/FARMACOVIGILANCIA.pdf" },
-  { group: "netzum", title: "Farmacovigilancia 2", meta: "Netzum", file: "certificados/FARMACOVIGILANCIA 2.pdf" },
-  { group: "netzum", title: "Farmacovigilancia 3", meta: "Netzum", file: "certificados/FARMACOVIGILANCIA 3.pdf" },
-  { group: "netzum", title: "Conflicto de intereses", meta: "Netzum", file: "certificados/CONFLICTO DE INTERESES.pdf" },
-  { group: "netzum", title: "Política de conflicto de intereses", meta: "Netzum", file: "certificados/POLITICA DE CONFLICTO DE INTERESES.pdf" },
-  { group: "netzum", title: "Embajadores INTI", meta: "Netzum", file: "certificados/EMBAJADORES INTI.pdf" },
-  { group: "netzum", title: "Certificado Netzum", meta: "Netzum", file: "certificados/ANDRES_BENJAMIN_TEXACA_ULO_863E4E74.pdf" }
-]; var CARPETA = "Certificados";   // escríbela EXACTAMENTE como se llama en GitHub
-CERTIFICADOS.forEach(function (c) {
-  c.file = CARPETA + "/" + encodeURI(c.file.replace(/^certificados\//i, ""));
-});
+  { nombre: "POWER BI BASICO CON IA", title: "Power BI básico con IA", meta: "Netzum", group: "datos" },
+  { nombre: "POWER BI INTERMEDIO", title: "Power BI intermedio", meta: "Netzum", group: "datos" },
+  { nombre: "INTRODUCCION A TABLEAU", title: "Introducción a Tableau", meta: "Netzum", group: "datos" },
+  { nombre: "TABLEAU INTERMEDIO AVANZADO", title: "Tableau intermedio y avanzado", meta: "Netzum", group: "datos" },
+  { nombre: "SOTYTELLING Y DATA VISUALIZATION", title: "Storytelling y data visualization", meta: "Netzum", group: "datos" },
+
+  { nombre: "OPERADOR ECONOMICO AUTORIZADO", title: "Operador económico autorizado", meta: "Netzum", group: "netzum" },
+  { nombre: "POWER APPS CON IA", title: "Power Apps con IA", meta: "Netzum", group: "netzum" },
+  { nombre: "POWER AUTOMATE CON IA", title: "Power Automate con IA", meta: "Netzum", group: "netzum" },
+  { nombre: "Microsoft Outlook", title: "Microsoft Outlook", meta: "Netzum", group: "netzum" },
+  { nombre: "LINKEDIN DESDE CERO CON IA", title: "LinkedIn desde cero con IA", meta: "Netzum", group: "netzum" },
+  { nombre: "INTERPRETACION DE LA ISO 9001", title: "Interpretación de la ISO 9001", meta: "Netzum", group: "netzum" },
+  { nombre: "FARMACOVIGILANCIA", title: "Farmacovigilancia 1", meta: "Netzum", group: "netzum" },
+  { nombre: "FARMACOVIGILANCIA 2", title: "Farmacovigilancia 2", meta: "Netzum", group: "netzum" },
+  { nombre: "FARMACOVIGILANCIA 3", title: "Farmacovigilancia 3", meta: "Netzum", group: "netzum" },
+  { nombre: "CONFLICTO DE INTERESES", title: "Conflicto de intereses", meta: "Netzum", group: "netzum" },
+  { nombre: "POLITICA DE CONFLICTO DE INTERESES", title: "Política de conflicto de intereses", meta: "Netzum", group: "netzum" },
+  { nombre: "EMBAJADORES INTI", title: "Embajadores INTI", meta: "Netzum", group: "netzum" },
+  { nombre: "ANDRES_BENJAMIN_TEXACA_ULO_863E4E74", title: "Certificado Netzum", meta: "Netzum", group: "netzum" }
+];
+
+var CERTIFICADOS = [];
+
+/* Quita tildes, mayúsculas y símbolos para comparar nombres sin errores */
+function normalizar(texto) {
+  return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+function sinExtension(nombre) { return nombre.replace(/\.[^.]+$/, ""); }
+function tituloDeArchivo(nombre) {
+  var t = sinExtension(nombre).replace(/_/g, " ").replace(/\s+/g, " ").trim();
+  return t.charAt(0).toUpperCase() + t.slice(1).toLowerCase();
+}
+
+/* Une los archivos reales de la carpeta con los títulos de TABLA */
+function construirLista(archivos) {
+  var porNombre = {};
+  archivos.forEach(function (a) { porNombre[normalizar(sinExtension(a.name))] = a; });
+  var usados = {};
+  var lista = [];
+  TABLA.forEach(function (t) {
+    var clave = normalizar(t.nombre);
+    var a = porNombre[clave];
+    if (!a) { console.warn("Certificados: no hay archivo en la carpeta para:", t.nombre); return; }
+    usados[clave] = true;
+    lista.push({ group: t.group, title: t.title, meta: t.meta, file: encodeURI(a.path) });
+  });
+  archivos.forEach(function (a) {
+    var clave = normalizar(sinExtension(a.name));
+    if (usados[clave]) return;
+    lista.push({ group: "otros", title: tituloDeArchivo(a.name), meta: "Certificado", file: encodeURI(a.path) });
+  });
+  return lista;
+}
+
+/* Plan B: si GitHub no responde, usa los nombres de TABLA tal cual */
+function listaDeRespaldo() {
+  return TABLA.map(function (t) {
+    return { group: t.group, title: t.title, meta: t.meta, file: CARPETA + "/" + encodeURI(t.nombre + ".pdf") };
+  });
+}
+
+function listarDesdeGitHub() {
+  var base = "https://api.github.com/repos/" + USUARIO + "/" + REPO + "/contents/";
+  function pedir(url) {
+    return fetch(url).then(function (r) {
+      if (!r.ok) throw new Error("GitHub respondió " + r.status);
+      return r.json();
+    });
+  }
+  return pedir(base)
+    .then(function (raiz) {
+      var carpeta = raiz.filter(function (i) { return i.type === "dir" && normalizar(i.name) === "certificados"; })[0];
+      if (!carpeta) throw new Error("No se encontró la carpeta de certificados en la raíz del repositorio");
+      return pedir(carpeta.url);
+    })
+    .then(function (items) {
+      var archivos = items.filter(function (i) { return i.type === "file" && /\.(pdf|png|jpe?g)$/i.test(i.name); });
+      if (!archivos.length) throw new Error("La carpeta está vacía");
+      return construirLista(archivos);
+    });
+}
 
 (function () {
   var filtros = document.getElementById("filtros");
@@ -758,9 +819,17 @@ CERTIFICADOS.forEach(function (c) {
   });
   visor.addEventListener("close", function () { vVista.textContent = ""; });
 
-  pintarFiltros();
-  pintarCarrusel();
+  window.iniciarCertificados = function (nuevaLista) {
+    CERTIFICADOS = nuevaLista;
+    pintarFiltros();
+    pintarCarrusel();
+  };
 })();
+
+listarDesdeGitHub().then(window.iniciarCertificados, function (error) {
+  console.warn("Certificados: se usa la lista de respaldo.", error);
+  window.iniciarCertificados(listaDeRespaldo());
+});
 </script>
 
 </body>
